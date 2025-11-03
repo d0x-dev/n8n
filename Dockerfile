@@ -28,11 +28,11 @@ EXPOSE 5678
 
 # Set environment variables for production defaults
 
-ENV NODE_ENV=production 
-N8N_PROTOCOL=https 
-EXECUTIONS_PROCESS=main 
-N8N_HOST=n8n.stormx.pw 
-WEBHOOK_URL=[https://n8n.stormx.pw/](https://n8n.stormx.pw/)
+ENV NODE_ENV=production
+ENV N8N_PROTOCOL=https
+ENV EXECUTIONS_PROCESS=main
+ENV N8N_HOST=n8n.stormx.pw
+ENV WEBHOOK_URL=[https://n8n.stormx.pw/](https://n8n.stormx.pw/)
 
 # Start n8n on all interfaces using Railway dynamic port
 
