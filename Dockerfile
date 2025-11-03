@@ -2,6 +2,10 @@
 
 FROM node:24-alpine
 
+# Install required packages for user creation
+
+RUN apk add --no-cache shadow curl
+
 # Install n8n globally
 
 RUN npm install -g n8n@latest
@@ -10,10 +14,10 @@ RUN npm install -g n8n@latest
 
 WORKDIR /app
 
-# Create non-root user
+# Create non-root user and group
 
-RUN addgroup -g 1001 n8n && 
-adduser -u 1001 -G n8n -s /bin/sh -D n8n
+RUN groupadd -g 1001 n8n && 
+useradd -u 1001 -g n8n -s /bin/sh -m n8n
 
 # Ensure n8n owns the app directory
 
