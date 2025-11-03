@@ -2,7 +2,7 @@
 
 FROM node:24-alpine
 
-# Install curl (optional, in case you need it in workflows)
+# Install curl (optional, used in workflows)
 
 RUN apk add --no-cache curl
 
@@ -24,6 +24,8 @@ USER n8n
 
 # Expose internal n8n port (Railway maps external dynamically)
 
+EXPOSE 5678
+
 # Set environment variables for production
 
 ENV NODE_ENV=production
@@ -33,6 +35,11 @@ ENV WEBHOOK_URL=[https://n8n.stormx.pw/](https://n8n.stormx.pw/)
 ENV N8N_RUNNERS_ENABLED=true
 ENV N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 ENV N8N_GIT_NODE_DISABLE_BARE_REPOS=true
+ENV DB_SQLITE_POOL_SIZE=5   # avoid SQLite pool deprecation warning
+
+# Optional: persistent storage path
+
+# Mount a volume at /home/n8n/.n8n in Railway to preserve workflows, credentials, etc.
 
 # Start n8n on all interfaces using Railway dynamic port
 
