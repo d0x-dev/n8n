@@ -2,7 +2,7 @@
 
 FROM node:24-alpine
 
-# Install curl (for healthcheck)
+# Install curl (optional, in case you need it in workflows)
 
 RUN apk add --no-cache curl
 
@@ -25,11 +25,6 @@ USER n8n
 # Expose internal n8n port (Railway maps external dynamically)
 
 EXPOSE 5678
-
-# Optional health check for Railway
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 
-CMD curl -f [http://localhost:$PORT/healthz](http://localhost:$PORT/healthz) || exit 1
 
 # Set environment variables for production defaults
 
