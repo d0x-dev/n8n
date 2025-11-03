@@ -6,9 +6,12 @@ RUN npm install -g n8n@latest
 # Create app directory
 WORKDIR /app
 
-# Create non-root user
-RUN addgroup -g 1000 n8n && \
-    adduser -u 1000 -G n8n -s /bin/sh -D n8n
+# Create non-root user with different IDs
+RUN addgroup -g 1001 n8n && \
+    adduser -u 1001 -G n8n -s /bin/sh -D n8n
+
+# Change ownership of app directory
+RUN chown -R n8n:n8n /app
 
 # Switch to non-root user
 USER n8n
