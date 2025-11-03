@@ -24,8 +24,6 @@ USER n8n
 
 # Expose internal n8n port (Railway maps external dynamically)
 
-EXPOSE 5678
-
 # Set environment variables for production
 
 ENV NODE_ENV=production
