@@ -35,7 +35,7 @@ ENV WEBHOOK_URL=[https://n8n.stormx.pw/](https://n8n.stormx.pw/)
 ENV N8N_RUNNERS_ENABLED=true
 ENV N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 ENV N8N_GIT_NODE_DISABLE_BARE_REPOS=true
-ENV DB_SQLITE_POOL_SIZE=5   # avoid SQLite pool deprecation warning
+ENV DB_SQLITE_POOL_SIZE=5
 
 # Optional: persistent storage path
 
