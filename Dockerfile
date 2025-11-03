@@ -2,9 +2,9 @@
 
 FROM node:24-alpine
 
-# Install required packages for user creation
+# Install curl (for healthcheck)
 
-RUN apk add --no-cache shadow curl
+RUN apk add --no-cache curl
 
 # Install n8n globally
 
@@ -14,14 +14,9 @@ RUN npm install -g n8n@latest
 
 WORKDIR /app
 
-# Create non-root user and group
+# Create non-root user and set ownership
 
-RUN groupadd -g 1001 n8n && 
-useradd -u 1001 -g n8n -s /bin/sh -m n8n
-
-# Ensure n8n owns the app directory
-
-RUN chown -R n8n:n8n /app
+RUN addgroup -S n8n && adduser -S -G n8n n8n && chown -R n8n:n8n /app
 
 # Switch to non-root user
 
@@ -41,7 +36,6 @@ CMD curl -f [http://localhost:$PORT/healthz](http://localhost:$PORT/healthz) || 
 ENV NODE_ENV=production 
 N8N_PROTOCOL=https 
 EXECUTIONS_PROCESS=main 
-# Optional defaults, override in Railway UI
 N8N_HOST=n8n.stormx.pw 
 WEBHOOK_URL=[https://n8n.stormx.pw/](https://n8n.stormx.pw/)
 
